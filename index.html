@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+
+<head>
+  <meta charset="utf8">
+  <title>Bubble Shooter</title>
+  <link href="_css/main.css" rel="stylesheet">
+  <link href="_css/game.css" rel="stylesheet">
+  <script src="_js/yepnope.js"></script>
+  <script src="_js/modernizr-custom.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <script>
+    //window.jQuery || document.write('<script src="_js/jquery-3.6.0.min.js"><\/script>');
+    yepnope([{
+      load: "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js",
+      complete: function () {
+        if (!window.jQuery) {
+          yepnope("_js/jquery-3.6.0.min.js");
+        }
+      }
+    },
+      "_js/jquery.kaboom.js",
+      "_js/ui.js",
+      "_js/bubble.js",
+      "_js/board.js",
+      "_js/collision-detector.js",
+      "_js/sound.js",
+    {
+      test: Modernizr.canvas,
+      yep: ["_js/renderer.js", "_js/sprite.js"]
+    },
+    {
+      load: "_js/game.js",
+      complete: function () {
+        $(function () {
+          var game = new BubbleShoot.Game();
+          game.init();
+        })
+      }
+    }]);
+  </script>
+</head>
+
+<body>
+  <div id="page">
+    <div id="top_bar">
+      <div id="top_level_box" class="top_bar_box">
+        <div id="top_level_label">Poziom:</div>
+        <div id="level">1</div>
+      </div>
+      <div class="top_bar_box">
+        <div class="top_score_label">Wynik:</div>
+        <div id="score">0</div>
+      </div>
+      <div class="top_bar_box">
+        <div class="top_score_label">Najwyższy wynik:</div>
+        <div id="high_score">0</div>
+      </div>
+    </div>
+    <div id="game">
+      <div id="board">
+      </div>
+      <div id="bubbles_remaining"></div>
+    </div>
+    <div id="footer_bar"></div>
+    <div id="start_game" class="dialog">
+      <div id="start_game_message">
+        <h2>Rozpocznij nową grę</h2>
+      </div>
+      <div class="but_start_game button">
+        Nowa gra
+      </div>
+    </div>
+    <div id="end_game" class="dialog">
+      <div id="end_game_message">
+        <h2>Koniec gry</h2>
+        <div id="final_score">
+          <span>Wynik:</span>
+          <span id="final_score_value"></span>
+        </div>
+        <div id="new_high_score">Nowy najwyższy wynik!</div>
+        <div id="level_failed" class="level_failed">Poziom nieudany!</div>
+        <div id="level_complete" class="level_complete">Poziom ukończony!</div>
+      </div>
+      <div class="but_start_game  button">
+        <span class="level_complete">Następny poziom</span>
+        <span class="level_failed">Nowa gra</span>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
